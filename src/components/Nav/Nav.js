@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
+import './nav.scss';
 
 
 
@@ -21,12 +22,14 @@ class Nav extends Component {
     render() {
         return (
             <div className="nav-component">
-            <header>
-                <Link to='/dashboard'>Dashboard</Link>
-                <Link to='/newpost'>New Post</Link>
-                <Link to='/post'>Post</Link>
-                <button onClick={this.logout}>Logout</button>
-            </header>
+                <div className="nav-bar-component">
+                    <header>
+                        <Link to='/dashboard'>Dashboard</Link>
+                        <Link to='/newpost'>New Post</Link>
+                        <Link to='/post'>Post</Link>
+                        <button onClick={this.logout}>Logout</button>
+                    </header>
+                </div>  
             </div>
         )
     }
