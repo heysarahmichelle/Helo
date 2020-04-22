@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './auth.scss';
+import {connect} from 'react-redux';
 
-export default class Auth extends Component {
+//Reducer
+import {updateUser} from '../../redux/reducer';
+
+class Auth extends Component {
     constructor(){
         super()
         this.state={
@@ -15,7 +19,7 @@ export default class Auth extends Component {
     handleLogin = () => {
         axios.put('/api/login', {username: this.state.username, password: this.state.password}).then(res => {
             if(res.data){
-                console.log(res.data)
+                this.props.updateUser({username: res.data.username, id: res.data.user_id})
                 this.props.history.push('/dashboard')
             } else {
                 this.setState({
@@ -31,6 +35,7 @@ export default class Auth extends Component {
         .then(res=>{
             console.log(res.data)
             if(res.data){
+                this.props.updateUser({username: res.data.username, id: res.data.user_id})
                 this.props.history.push('/dashboard')
             } else {
                 this.setState({
@@ -74,3 +79,5 @@ export default class Auth extends Component {
         )
     }
 }
+
+export default connect(null, {updateUser})(Auth);

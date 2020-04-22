@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import axios from 'axios';
 import './nav.scss';
 
@@ -20,6 +21,7 @@ class Nav extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className="nav-component">
                 <div className="nav-bar-component">
@@ -27,6 +29,7 @@ class Nav extends Component {
                         <Link to='/dashboard'>Dashboard</Link>
                         <Link to='/newpost'>New Post</Link>
                         <Link to='/post'>Post</Link>
+                        <h1>{this.props.username}</h1>
                         <button onClick={this.logout}>Logout</button>
                     </header>
                 </div>  
@@ -35,4 +38,8 @@ class Nav extends Component {
     }
 }
 
-export default withRouter(Nav);
+const mapStateToProps = (reduxState) => {
+    return reduxState
+};
+
+export default withRouter(connect(mapStateToProps)(Nav));
